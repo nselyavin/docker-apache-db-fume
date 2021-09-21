@@ -1,17 +1,17 @@
 version: "3"
 
 services:
-  db:
-    image: mysql:5.7
-    container_name: db
-    command: --init-file /data/application/init.sql
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-    ports:
-      - "3306:3306"
-    volumes:
-      - dbdata:/var/lib/mysql
-      - ./sql/init.sql:/data/application/init.sql
+  # db:
+  #   image: mysql:5.7
+  #   container_name: db
+  #   command: --init-file /data/application/init.sql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: secret
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - dbdata:/var/lib/mysql
+  #     - ./sql/init.sql:/data/application/init.sql
 
   server:
     build: php/
@@ -20,8 +20,8 @@ services:
       - ./src:/var/www/html
     ports:
       - "80:80"
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
 
 volumes:
   dbdata:
