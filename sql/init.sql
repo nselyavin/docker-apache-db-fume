@@ -12,9 +12,9 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 INSERT INTO users (name, surname)
-SELECT * FROM (SELECT 'Nikita', 'Selyavin') AS tmp
+SELECT * FROM (SELECT 'Ni', 'Sel') AS tmp
 WHERE NOT EXISTS (
-    SELECT name FROM users WHERE name = 'Nikita' AND surname = 'Selyavin'
+    SELECT name FROM users WHERE name = 'Ni' AND surname = 'Sel'
 ) LIMIT 1;
 
 INSERT INTO users (name, surname)
