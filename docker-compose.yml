@@ -13,15 +13,27 @@ services:
       - dbdata:/var/lib/mysql
       - ./sql/init.sql:/data/application/init.sql
 
-  server:
-    build: php/
-    container_name: server
+  apache:
+    build: apache/
+    container_name: apache
+    volumes:
+      - ./src:/var/www/html
+    links:
+      - db
+    expose:
+      - 9000
+
+  nginx:
+    build: nginx/
+    container_name: nginx
     volumes:
       - ./src:/var/www/html
     ports:
-      - "80:80"
-    depends_on:
-      - db
+      - "8080:80"
+    links:
+      - apache
+    environment:
+      - NGINX_PORT=80
 
 volumes:
   dbdata:

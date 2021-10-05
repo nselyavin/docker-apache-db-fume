@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get update -y && apt-get install -y sendmail libpng-dev
 RUN apt-get update && \
     apt-get install -y \
-        zlib1g-dev 
+    zlib1g-dev 
 
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install zip
@@ -19,3 +19,5 @@ RUN chown -R www-data:www-data /var/www
 RUN usermod -u 1000 www-data
 
 RUN docker-php-ext-install mysqli
+
+WORKDIR /var/www/html
