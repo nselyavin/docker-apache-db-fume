@@ -12,7 +12,7 @@ services:
     env_file: ./.env
     volumes:
       - ./mysql-data:/var/lib/mysql
-      - ./mysql-data/init.sql:/data/application/init.sql
+      - ./mysql/init.sql:/data/application/init.sql
 
   nginx:
     build: './nginx'
