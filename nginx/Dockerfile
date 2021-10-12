@@ -1,5 +1,6 @@
-FROM nginx
+FROM nginx:alpine
 
-ADD nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./conf/default.conf /etc/nginx/conf.d/default.conf
 
-WORKDIR /var/www/html
+# CMD ["nginx-debug", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]

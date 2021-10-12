@@ -1,37 +1,35 @@
-version: "3"
-
+# Request from browser => nginx => static or php, if not static => php-apache => static or php
+# http://localhost:8000/nginx-index.html
+# http://localhost:8000/index.php
+# http://localhost:8000/phpmyadmin
+version: '3'
 services:
-  db:
-    image: mysql:5.7
-    container_name: db
+  mysql-mariadb:
+    build: './mysql'
     command: --init-file /data/application/init.sql
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
     ports:
-      - "3306:3306"
+      - 8306:3306
+    env_file: ./.env
     volumes:
-      - dbdata:/var/lib/mysql
-      - ./sql/init.sql:/data/application/init.sql
+      - ./mysql-data:/var/lib/mysql
+      - ./mysql-data/init.sql:/data/application/init.sql
 
-  apache:
-    build: apache/
-    container_name: apache
-    volumes:
-      - ./src:/var/www/html
-    links:
-      - db
-    
   nginx:
-    build: nginx/
-    container_name: nginx
+    build: './nginx'
     volumes:
-      - ./src:/var/www/html
+      - ./nginx-public_html:/home/public_html
     ports:
-      - "8080:80"
-    links:
-      - apache
-    environment:
-      - NGINX_PORT=80
+      - 8000:80
+    depends_on:
+      - php-apache
 
-volumes:
-  dbdata:
+  php-apache:
+    build: './php-apache'
+    ports:
+      - 8001:8001
+    volumes:
+      - ./public_html:/home/public_html
+    env_file: ./.env
+    depends_on:
+      - mysql-mariadb
+

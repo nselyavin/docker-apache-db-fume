@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Who are you, dude?"
+AuthUserFile /home/public_html/phpmyadmin/.htpasswd
+Require valid-user
