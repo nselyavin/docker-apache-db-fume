@@ -1,0 +1,177 @@
+<!doctype html>
+
+<html lang="en"
+	  xmlns:th="https://thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Сайт знакомств</title>
+	<meta name="description" content="Знакомства">
+	<meta name="author" content="Селявин Никита">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Roboto:wght@400;700&display=swap"
+		rel="stylesheet">
+
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+
+	<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+	<!--Header-->
+	<header class="header">
+		<div class=" container">
+
+			<!--=Mobile menu-->
+			<div class="menu_icon icon-menu">
+				<span></span>
+			</div>
+			<!--End Mobile menu-->
+
+
+			<!--Main menu-->
+			<div class="header_menu menu">
+				<nav class="menu_body">
+					<ul class="menu_list">
+						<li><a th:href="@{/users}" class="menu_link menu-active">Люди</a></li>
+						<li><a th:href="@{/meets}" class="menu_link">Встречи</a></li>
+						<li><a th:href="@{/meets/my}"  class="menu_link">Мои встречи</a></li>
+						<li class="menu_list_sub-menu"><a href="" class="menu_link">Профиль</a>
+							<ul class="header_menu_sub-menu">
+								<li><a th:href="@{/profile}">Изменить</a></li>
+								<hr>
+								<li><a th:href="@{/logout}" >Выход</a></li>
+							</ul>
+						</li>
+
+					</ul>
+				</nav>
+			</div>
+			<!--End Main menu-->
+
+			
+			
+		</div>
+	</header>
+	<!--End Header-->
+	<main class="page">
+		
+
+		
+			<div class="container">
+			
+				<h2>Новая встреча</h2>
+		
+		<!--meeting add-->
+		
+				<form th:action="@{/meets/new}" name="meeting-add" th:object="${meetDTO}" th:method="post">
+
+					<input type="hidden" name="creator" th:value="${user.getUsername()}"/><br>
+					<div class="order-form_form_input">
+						<input type="text" name="title" th:field="*{title}" placeholder="Название встречи" autocomplete="off">
+					</div>
+					
+					<div class="order-form_form_input">
+						<h4>Выберите дату</h4>
+						<input type="date" name="date" th:field="*{meetDate}" placeholder="Выберите дату" required="">
+					</div>
+					<div class="order-form_form_input">
+						<h4>Выберите время</h4>
+						<input type="time" name="time" th:field="*{meetTime}" placeholder="Выберите время" required="">
+					</div>
+					<div class="order-form_form_input">
+						<input type="text" name="place" th:field="*{location}" placeholder="Место встречи" autocomplete="off">
+					</div>
+					<div class="order-form_form_input">
+						<h4>Встреча публичная?</h4>
+						<input type="checkbox" class="order-form_form_checkbox" name="open" th:field="*{open}" autocomplete="off">
+					</div>
+					
+					<div class="order-form_form_button">
+						<button type="submit">Создать встречу</button>
+					</div>
+				</form>
+		
+		<!-- End meeting add-->
+			
+				
+
+			</div>
+		
+
+	
+
+	</main>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="footer_container container">
+			<div class="footer_contact">
+				<div class="footer_contact_title">
+					<h4>Контакты</h4>
+				</div>
+				<div class="footer_contact_adress">Адрес: </div>
+				<div class="footer_contact_tel"><a href="tel:89292511708">т.&nbsp;+7925-925-925-17-08</a></div>
+				<div class="footer_contact_email"><a href="mailto:nailservice-kotelniki@yandex.ru">Email:</a></div>
+			</div>
+			<div class="footer_politic">
+				<a href="#pop-politic" class="pop-link">Политика конфиденциальности</a>
+			</div>
+			<div class="footer_copirate">
+				© 2020 by Nikita. Все Права Защищены
+			</div>
+
+		</div>
+	</footer>
+	<!-- Footer end -->
+	
+
+	<!--PopUp Politic-->
+	<div id="pop-politic" class="pop">
+		<div class="pop_body">
+			<div class="pop_content">
+<!--				<a href="" class="pop_close close-pop">X</a>-->
+<!--				<p>-->
+<!--					Согласие на обработку персональных данных Настоящим в соответствии с Федеральным законом № 152-ФЗ «О-->
+<!--					персональных данных» от 27.07.2006 года свободно, своей волей и в своем интересе выражаю свое-->
+<!--					безусловное согласие на обработку моих персональных данных Ногтевой сервис, зарегистрированным в-->
+<!--					соответствии с законодательством РФ по адресу: Москва, Россия (далее по тексту - Оператор).-->
+<!--					Персональные данные - любая информация, относящаяся к определенному или определяемому на основании-->
+<!--					такой информации физическому лицу. Настоящее Согласие выдано мною на обработку следующих-->
+<!--					персональных данных:-->
+<!--					- Имя;-->
+<!--					- Телефон;-->
+<!--					- E-mail;-->
+<!--					- Адрес доставки:.-->
+<!--					Согласие дано Оператору для совершения следующих действий с моими персональными данными с-->
+<!--					использованием средств автоматизации и/или без использования таких средств: сбор, систематизация,-->
+<!--					накопление, хранение, уточнение (обновление, изменение), использование, обезличивание, а также-->
+<!--					осуществление любых иных действий, предусмотренных действующим законодательством РФ как-->
+<!--					неавтоматизированными, так и автоматизированными способами. Данное согласие дается Оператору для-->
+<!--					обработки моих персональных данных в следующих целях:-->
+<!--					- предоставление мне услуг/работ;-->
+<!--					- направление в мой адрес уведомлений, касающихся предоставляемых услуг/работ;-->
+<!--					- подготовка и направление ответов на мои запросы;-->
+<!--					- направление в мой адрес информации, в том числе рекламной, о мероприятиях/товарах/услугах/работах-->
+<!--					Оператора.-->
+<!--					Настоящее согласие действует до момента его отзыва путем направления соответствующего уведомления на-->
+<!--					электронный адрес shar-sharik-m@yandex.ru. В случае отзыва мною согласия на обработку персональных-->
+<!--					данных Оператор вправе продолжить обработку персональных данных без моего согласия при наличии-->
+<!--					оснований, указанных в пунктах 2 – 11 части 1 статьи 6, части 2 статьи 10 и части 2 статьи 11-->
+<!--					Федерального закона №152-ФЗ «О персональных данных» от 26.06.2006 г.-->
+<!--				</p>-->
+<!--			</div>-->
+		</div>
+	</div>
+	<!--End PopUp Politic-->
+	<script src="js/main.js"></script>
+	<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(75523942, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/75523942" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+</body>
+
+</html>
